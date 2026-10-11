@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TypeScript Fundamentals | PlaywrightHUB</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="../index.html">Playwright<span>HUB</span></a>
+            <nav class="top-nav" aria-label="Main navigation">
+                <a href="../Playwright/index.html">Playwright</a>
+                <a href="../Javascript/Asynchronus.html">JavaScript</a>
+                <a href="Types.html" aria-current="page">TypeScript</a>
+                <a href="../APITesting/Requests.html">API Testing</a>
+            </nav>
+        </div>
+    </header>
+    <div class="docs-layout">
+        <aside class="sidebar" aria-label="TypeScript topics">
+            <p class="sidebar-label">TypeScript</p>
+            <a href="#types" aria-current="location">Types</a>
+            <a href="#interfaces">Interfaces</a>
+            <a href="#generics">Generics</a>
+        </aside>
+        <main class="article">
+            <p class="breadcrumb">TypeScript / Fundamentals</p>
+            <h1>TypeScript Fundamentals</h1>
+            <p class="intro">A quick reference to the type system commonly used in Playwright projects.</p>
+            <section id="types">
+                <h2>Types</h2>
+                <p>Annotate values when an explicit type makes an API or function easier to understand.</p>
+                <pre class="code-sample"><code>const retries: number = 2;
+const browserName: string = 'chromium';</code></pre>
+            </section>
+            <section id="interfaces">
+                <h2>Interfaces</h2>
+                <p>Describe the shape of objects passed between helpers, fixtures, and tests.</p>
+                <pre class="code-sample"><code>interface User {
+  name: string;
+  email: string;
+}</code></pre>
+            </section>
+            <section id="generics">
+                <h2>Generics</h2>
+                <p>Use generics to preserve useful type information while writing reusable functions and helpers.</p>
+                <pre class="code-sample"><code>function first&lt;T&gt;(items: T[]): T | undefined {
+  return items[0];
+}</code></pre>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

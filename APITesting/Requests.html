@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>API Testing | PlaywrightHUB</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="../index.html">Playwright<span>HUB</span></a>
+            <nav class="top-nav" aria-label="Main navigation">
+                <a href="../Playwright/index.html">Playwright</a>
+                <a href="../Javascript/Asynchronus.html">JavaScript</a>
+                <a href="../TypeScript/Types.html">TypeScript</a>
+                <a href="Requests.html" aria-current="page">API Testing</a>
+            </nav>
+        </div>
+    </header>
+    <div class="docs-layout">
+        <aside class="sidebar" aria-label="API testing topics">
+            <p class="sidebar-label">API Testing</p>
+            <a href="#requests" aria-current="location">Requests</a>
+            <a href="#status-codes">Status codes</a>
+            <a href="#authentication">Authentication</a>
+            <a href="#validation">Response validation</a>
+        </aside>
+        <main class="article">
+            <p class="breadcrumb">API Testing / Requests</p>
+            <h1>API Testing</h1>
+            <p class="intro">Notes for checking HTTP behavior and service responses in an automated test suite.</p>
+            <section id="requests">
+                <h2>Requests</h2>
+                <p>Send requests directly to an API to check service behavior without driving the browser UI.</p>
+                <pre class="code-sample"><code>const response = await request.get('/api/users');
+const users = await response.json();</code></pre>
+            </section>
+            <section id="status-codes">
+                <h2>Status codes</h2>
+                <p>Assert the expected HTTP status before checking the details of a response body.</p>
+                <pre class="code-sample"><code>expect(response.status()).toBe(200);</code></pre>
+            </section>
+            <section id="authentication">
+                <h2>Authentication</h2>
+                <p>Use the request context's configured headers or storage state to send authenticated API calls.</p>
+            </section>
+            <section id="validation">
+                <h2>Response validation</h2>
+                <p>Check important fields and values in the response so tests catch contract regressions, not just successful connections.</p>
+                <pre class="code-sample"><code>expect(users[0]).toMatchObject({
+  id: expect.any(Number),
+  email: expect.stringContaining('@')
+});</code></pre>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Asynchronous JavaScript | PlaywrightHUB</title>
+	<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+	<header class="site-header">
+		<div class="header-inner">
+			<a class="brand" href="../index.html">Playwright<span>HUB</span></a>
+			<nav class="top-nav" aria-label="Main navigation">
+				<a href="../Playwright/index.html">Playwright</a>
+				<a href="Asynchronus.html" aria-current="page">JavaScript</a>
+				<a href="../TypeScript/Types.html">TypeScript</a>
+				<a href="../APITesting/Requests.html">API Testing</a>
+			</nav>
+		</div>
+	</header>
+	<div class="docs-layout">
+		<aside class="sidebar" aria-label="JavaScript topics">
+			<p class="sidebar-label">JavaScript</p>
+			<a href="#asynchronous" aria-current="location">Asynchronous JavaScript</a>
+			<a href="#promises">Promises</a>
+			<a href="#async-await">Async and await</a>
+			<a href="#error-handling">Error handling</a>
+		</aside>
+		<main class="article">
+			<p class="breadcrumb">JavaScript / Asynchronous JavaScript</p>
+			<h1>Asynchronous JavaScript</h1>
+			<p class="intro">Understand promises and async functions to coordinate browser actions, network requests, and test setup.</p>
+			<section id="asynchronous">
+				<h2>Asynchronous code</h2>
+				<p>JavaScript can start an operation and continue running other code while it waits. Promises represent the result that will become available later.</p>
+			</section>
+			<section id="promises">
+				<h2>Promises</h2>
+				<p>A promise can be pending, fulfilled, or rejected. Use <code>then</code> and <code>catch</code> to handle its result, or await it inside an async function.</p>
+				<pre class="code-sample"><code>fetch('/api/profile')
+  .then(response =&gt; response.json())
+  .then(profile =&gt; console.log(profile))
+  .catch(error =&gt; console.error(error));</code></pre>
+			</section>
+			<section id="async-await">
+				<h2>Async and await</h2>
+				<p><code>async</code> and <code>await</code> let you write promise-based flows in a readable, sequential style.</p>
+				<pre class="code-sample"><code>async function loadProfile() {
+  const response = await fetch('/api/profile');
+  return response.json();
+}</code></pre>
+			</section>
+			<section id="error-handling">
+				<h2>Error handling</h2>
+				<p>Wrap awaited operations in <code>try</code> and <code>catch</code> when you need to handle rejected promises or report useful context.</p>
+				<pre class="code-sample"><code>try {
+  const profile = await loadProfile();
+} catch (error) {
+  console.error('Could not load profile', error);
+}</code></pre>
+			</section>
+		</main>
+	</div>
+</body>
+</html>

@@ -1,0 +1,1164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A printable A4 reference sheet for Playwright UI and API assertions, Postman equivalents, and interview questions."
+    />
+    <title>Playwright &amp; Postman Assertions | A4 Cheat Sheet</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #1e2b24;
+        --muted: #54645a;
+        --paper: #fff;
+        --canvas: #f1f5f2;
+        --line: #b6c5bc;
+        --soft: #eff5f0;
+        --teal: #19755c;
+        --teal-light: #e5f2ea;
+        --coral: #c45a45;
+        --coral-light: #fff0eb;
+        --navy: #173b30;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--canvas);
+        color: var(--ink);
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      .toolbar {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        margin: 18px 0 10px;
+      }
+
+      .print-button {
+        padding: 9px 14px;
+        border: 0;
+        border-radius: 4px;
+        background: var(--navy);
+        color: white;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .print-button:hover {
+        background: var(--teal);
+      }
+
+      .sheet {
+        width: 100%;
+        min-height: 297mm;
+        margin: 0 0 24px;
+        padding: 12mm;
+        background: var(--paper);
+        box-shadow: 0 14px 40px rgb(0 0 0 / 14%);
+        break-after: page;
+        page-break-after: always;
+      }
+
+      .sheet:last-child {
+        break-after: auto;
+        page-break-after: auto;
+      }
+
+      .masthead {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+        padding-bottom: 12px;
+        border-bottom: 3px solid var(--teal);
+      }
+
+      .eyebrow {
+        margin: 0 0 4px;
+        color: var(--coral);
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        color: var(--navy);
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 28px;
+        line-height: 1.05;
+      }
+
+      .page-one .masthead h1 {
+        white-space: nowrap;
+      }
+
+      .subtitle {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 11px;
+      }
+
+      .edition {
+        flex: 0 0 auto;
+        padding: 6px 9px;
+        border: 1px solid var(--line);
+        border-radius: 3px;
+        background: var(--coral-light);
+        color: var(--navy);
+        font-size: 9px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .principle {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 10px 0 12px;
+        padding: 8px 10px;
+        border-left: 4px solid var(--coral);
+        background: var(--soft);
+      }
+
+      .scope-note {
+        max-width: 150mm;
+        margin: 12px 0 18px;
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-left: 4px solid var(--teal);
+        background: var(--teal-light);
+        line-height: 1.5;
+      }
+
+      .scope-note strong {
+        color: var(--navy);
+      }
+
+      .comparison-model {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin: 12px 0;
+      }
+
+      .comparison-model article {
+        padding: 10px;
+        border-top: 3px solid var(--teal);
+        background: var(--soft);
+      }
+
+      .comparison-model article:last-child {
+        border-color: var(--coral);
+      }
+
+      .comparison-model h3 {
+        margin: 0 0 5px;
+        color: var(--navy);
+        font-size: 12px;
+      }
+
+      .comparison-model p {
+        margin: 0 0 5px;
+        color: var(--muted);
+        font-size: 10px;
+      }
+
+      .comparison-model code {
+        font-size: 10px;
+      }
+
+      .assertion-note {
+        margin-top: 8px;
+        padding: 8px 10px;
+        border-left: 3px solid var(--coral);
+        background: var(--coral-light);
+        font-size: 10px;
+      }
+
+      .principle strong {
+        color: var(--teal);
+        white-space: nowrap;
+      }
+
+      .columns {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+        gap: 12px;
+        align-items: start;
+      }
+
+      .page-one .columns {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .page-one .columns th:first-child {
+        width: 55%;
+      }
+
+      .page-one .columns td:nth-child(2) code {
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .api-table th:first-child {
+        width: 18%;
+      }
+
+      .page-two .api-table td:nth-child(2) code,
+      .page-two .api-table td:nth-child(3) code {
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+        gap: 14px;
+        align-items: start;
+        margin-top: 14px;
+      }
+
+      .page-two .bottom-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .page-two .masthead > div:first-child {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .page-two .masthead h1 {
+        white-space: nowrap;
+      }
+
+      .stack {
+        display: grid;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      section {
+        min-width: 0;
+      }
+
+      .section-heading {
+        display: flex;
+        align-items: baseline;
+        gap: 7px;
+        margin: 0 0 6px;
+        color: var(--navy);
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 16px;
+        line-height: 1.15;
+      }
+
+      .section-number {
+        color: var(--coral);
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        font-size: 10px;
+        font-weight: 800;
+      }
+
+      .section-note {
+        margin: -2px 0 6px;
+        color: var(--muted);
+        font-size: 9px;
+      }
+
+      .page-label {
+        margin-left: auto;
+        color: var(--muted);
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+      }
+
+      th,
+      td {
+        padding: 6px 7px;
+        border: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+
+      th {
+        background: var(--navy);
+        color: white;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      tbody tr:nth-child(even) {
+        background: var(--soft);
+      }
+
+      td:first-child {
+        color: var(--ink);
+        font-weight: 650;
+      }
+
+      .page-one .columns td:first-child,
+      .page-two .api-table td:first-child {
+        font-size: 12px;
+        font-weight: 400;
+      }
+
+      code,
+      pre {
+        font-family: Consolas, 'Courier New', monospace;
+      }
+
+      code {
+        color: var(--teal);
+        font-size: 11px;
+        overflow-wrap: anywhere;
+      }
+
+      .sample-data {
+        margin: 0 0 7px;
+        padding: 6px 7px;
+        border: 1px solid var(--line);
+        border-radius: 3px;
+        background: var(--soft);
+        color: var(--ink);
+        font-size: 11px;
+        line-height: 1.5;
+        white-space: pre-wrap;
+      }
+
+      .sample-label {
+        display: block;
+        margin-bottom: 3px;
+        color: var(--teal);
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        font-size: 8px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .mapping-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5px 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .mapping-list li {
+        padding: 5px 6px;
+        border-left: 2px solid var(--teal);
+        background: var(--soft);
+        font-size: 10px;
+      }
+
+      .mapping-list span {
+        display: block;
+        margin-top: 2px;
+        color: var(--muted);
+        font-size: 9px;
+      }
+
+      .memory-box {
+        margin-top: 7px;
+        padding: 7px;
+        border: 1px solid var(--line);
+        border-radius: 3px;
+        background: var(--teal-light);
+      }
+
+      .memory-box h3 {
+        margin: 0 0 4px;
+        color: var(--navy);
+        font-size: 9px;
+        text-transform: uppercase;
+      }
+
+      .memory-box p {
+        margin: 2px 0;
+        font-size: 9px;
+      }
+
+      .interview-table th:first-child {
+        width: 44%;
+      }
+
+      .page-one .interview-table th:first-child {
+        width: 34%;
+      }
+
+      .interview-table td,
+      .interview-table th {
+        padding: 4px 5px;
+      }
+
+      .golden-rule {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 3px;
+        background: var(--coral-light);
+      }
+
+      .golden-rule h3 {
+        margin: 0 0 5px;
+        color: var(--navy);
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 13px;
+      }
+
+      .rules {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3px 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .rules li {
+        font-size: 9px;
+      }
+
+      .rules strong {
+        color: var(--navy);
+      }
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 10px;
+        padding-top: 6px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 9px;
+      }
+
+      @media (max-width: 720px) {
+        .sheet {
+          width: 100%;
+          min-height: 0;
+          padding: 18px;
+        }
+
+        .masthead {
+          align-items: flex-start;
+        }
+
+        .page-one .masthead {
+          display: block;
+        }
+
+        .page-one .masthead .edition {
+          display: inline-block;
+          margin-top: 8px;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+
+        .page-one .masthead h1 {
+          font-size: 20px;
+        }
+
+        @media (max-width: 400px) {
+          .page-one .masthead h1 {
+            font-size: 18px;
+          }
+        }
+
+        .columns {
+          grid-template-columns: 1fr;
+        }
+
+        .bottom-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .principle {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 3px;
+        }
+      }
+
+      @page {
+        size: A4 portrait;
+        margin: 8mm;
+      }
+
+      @media print {
+        :root {
+          --ink: #000;
+          --muted: #222;
+          --paper: #fff;
+          --canvas: #fff;
+          --line: #888;
+          --soft: #f2f2f2;
+          --teal: #000;
+          --teal-light: #eee;
+          --coral: #000;
+          --coral-light: #f2f2f2;
+          --navy: #000;
+        }
+
+        html,
+        body {
+          width: auto;
+          height: auto;
+          background: white;
+          print-color-adjust: exact;
+          -webkit-print-color-adjust: exact;
+        }
+
+        body {
+          font-size: 13px;
+        }
+
+        body,
+        body * {
+          font-family: Arial, Helvetica, sans-serif;
+        }
+
+        code,
+        pre {
+          font-family: Consolas, 'Courier New', monospace;
+        }
+
+        .toolbar {
+          display: none;
+        }
+
+        .sheet {
+          width: auto;
+          height: 281mm;
+          min-height: 0;
+          margin: 0;
+          padding: 5mm 3mm;
+          box-shadow: none;
+        }
+
+        .masthead {
+          padding-bottom: 8px;
+        }
+
+        .eyebrow,
+        .edition {
+          font-size: 10px;
+        }
+
+        .subtitle {
+          font-size: 13px;
+        }
+
+        h1 {
+          font-size: 26px;
+        }
+
+        .principle {
+          margin: 7px 0 9px;
+          padding: 6px 8px;
+        }
+
+        .columns {
+          gap: 9px;
+        }
+
+        .comparison-model {
+          gap: 8px;
+          margin: 10px 0;
+        }
+
+        .comparison-model article {
+          padding: 8px;
+        }
+
+        .comparison-model h3 {
+          font-size: 13px;
+        }
+
+        .comparison-model p {
+          font-size: 11px;
+        }
+
+        .comparison-model code {
+          font-size: 11px;
+        }
+
+        .assertion-note {
+          font-size: 11px;
+        }
+
+        .bottom-grid {
+          gap: 12px;
+          margin-top: 5px;
+        }
+
+        .stack {
+          gap: 9px;
+        }
+
+        .section-heading {
+          margin-bottom: 6px;
+          font-size: 19px;
+        }
+
+        .section-number,
+        .page-label {
+          font-size: 12px;
+        }
+
+        th,
+        td {
+          padding: 4px 6px;
+        }
+
+        .page-one .columns th,
+        .page-one .columns td {
+          padding-top: 2px;
+          padding-bottom: 2px;
+        }
+
+        th {
+          font-size: 12px;
+        }
+
+        code {
+          font-size: 12px;
+        }
+
+        .section-note {
+          font-size: 11px;
+        }
+
+        .page-one .api-table th,
+        .page-one .api-table td {
+          padding-top: 3px;
+          padding-bottom: 3px;
+        }
+
+        .scope-note {
+          max-width: none;
+          margin: 10px 0 12px;
+          padding: 8px 10px;
+        }
+
+        .api-table {
+          font-size: 12px;
+        }
+
+        .api-table th,
+        .api-table td {
+          padding: 2px 6px;
+        }
+
+        .api-table code {
+          font-size: 12px;
+        }
+
+        .sample-data {
+          padding: 5px;
+          margin-bottom: 3px;
+          font-size: 12px;
+        }
+
+        .sample-label {
+          font-size: 10px;
+        }
+
+        .memory-box h3 {
+          font-size: 10px;
+        }
+
+        .memory-box p,
+        .rules li {
+          font-size: 10px;
+        }
+
+        .golden-rule h3 {
+          font-size: 14px;
+        }
+
+        .footer {
+          margin-top: 5px;
+          font-size: 11px;
+        }
+
+        body,
+        .sheet {
+          color: #000;
+          background: #fff;
+        }
+
+        h1,
+        .subtitle,
+        .eyebrow,
+        .edition,
+        .principle strong,
+        .section-heading,
+        .section-number,
+        .section-note,
+        .page-label,
+        .scope-note strong,
+        .sample-label,
+        .sample-data,
+        .comparison-model h3,
+        .comparison-model p,
+        .mapping-list span,
+        .memory-box h3,
+        .golden-rule h3,
+        .rules strong,
+        .footer,
+        td:first-child,
+        code {
+          color: #000;
+        }
+
+        th {
+          color: #000;
+          background: #e5e5e5;
+          border-color: #555;
+        }
+
+        td {
+          border-color: #888;
+        }
+
+        tbody tr:nth-child(even) {
+          background: #f2f2f2;
+        }
+
+        .principle,
+        .scope-note,
+        .sample-data,
+        .comparison-model article,
+        .assertion-note,
+        .memory-box,
+        .golden-rule {
+          background: #f2f2f2;
+          border-color: #777;
+        }
+
+        .comparison-model article:last-child {
+          border-top-color: #333;
+        }
+
+        .edition {
+          background: #fff;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toolbar">
+      <button class="print-button" type="button" onclick="window.print()">
+        Print A4 cheat sheet
+      </button>
+    </div>
+
+    <main class="sheet page-one">
+      <header class="masthead">
+        <div>
+          <p class="eyebrow">Interview reference · Page 1 of 2</p>
+          <h1>Playwright UI Assertions</h1>
+          <p class="subtitle">
+            Web-first checks for browser elements, pages, and user-visible
+            state.
+          </p>
+        </div>
+        <div class="edition">UI testing</div>
+      </header>
+
+      <aside class="principle">
+        <strong>Web-first assertions</strong>
+        <span
+          >Playwright auto-waits for the expected UI state before failing.</span
+        >
+      </aside>
+
+      <div class="columns">
+        <div class="stack">
+          <section aria-labelledby="ui-title">
+            <h2 class="section-heading" id="ui-title">
+              <span class="section-number">01</span> Playwright UI Assertions
+            </h2>
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Meaning / common interview distinction</th>
+                  <th scope="col">Playwright example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    Node is visible; it can still be outside the viewport.
+                  </td>
+                  <td><code>await expect(loginBtn).toBeVisible()</code></td>
+                </tr>
+                <tr>
+                  <td>
+                    No locator match, or matched node isn't visible (e.g. CSS
+                    <code>display: none</code> or
+                    <code>visibility: hidden</code>). It may still be in the
+                    DOM.
+                  </td>
+                  <td><code>await expect(loader).toBeHidden()</code></td>
+                </tr>
+                <tr>
+                  <td>
+                    Node exists in the DOM; it may be hidden or off-screen.
+                  </td>
+                  <td><code>await expect(locator).toBeAttached()</code></td>
+                </tr>
+                <tr>
+                  <td>
+                    Node is absent from the DOM; unlike hidden, it is detached.
+                  </td>
+                  <td><code>await expect(locator).toBeDetached()</code></td>
+                </tr>
+                <tr>
+                  <td>At least part of the element intersects the viewport.</td>
+                  <td><code>await expect(locator).toBeInViewport()</code></td>
+                </tr>
+                <tr>
+                  <td>Control accepts interaction.</td>
+                  <td><code>await expect(button).toBeEnabled()</code></td>
+                </tr>
+                <tr>
+                  <td>Control does not accept interaction.</td>
+                  <td><code>await expect(button).toBeDisabled()</code></td>
+                </tr>
+                <tr>
+                  <td>Input can be changed by the user.</td>
+                  <td><code>await expect(input).toBeEditable()</code></td>
+                </tr>
+                <tr>
+                  <td>Element currently has keyboard focus.</td>
+                  <td><code>await expect(input).toBeFocused()</code></td>
+                </tr>
+                <tr>
+                  <td>Checkbox or radio control is selected.</td>
+                  <td><code>await expect(rememberMe).toBeChecked()</code></td>
+                </tr>
+                <tr>
+                  <td>
+                    Entire rendered text equals expected text (exact match).
+                  </td>
+                  <td><code>await expect(msg).toHaveText('Success')</code></td>
+                </tr>
+                <tr>
+                  <td>Rendered text includes expected text (partial match).</td>
+                  <td>
+                    <code>await expect(msg).toContainText('Success')</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Attribute has the expected name and value.</td>
+                  <td>
+                    <code
+                      >await expect(input).toHaveAttribute('type',
+                      'email')</code
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td>Element's class list matches the expected pattern.</td>
+                  <td><code>await expect(menu).toHaveClass(/active/)</code></td>
+                </tr>
+                <tr>
+                  <td>Input's current value matches the expected value.</td>
+                  <td><code>await expect(input).toHaveValue('Admin')</code></td>
+                </tr>
+                <tr>
+                  <td>Locator matches the expected number of elements.</td>
+                  <td><code>await expect(rows).toHaveCount(10)</code></td>
+                </tr>
+                <tr>
+                  <td>Current page URL and title match expectations.</td>
+                  <td>
+                    <code>await expect(page).toHaveURL('/dashboard')</code> /
+                    <code>await expect(page).toHaveTitle('Dashboard')</code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </div>
+      </div>
+      <section aria-labelledby="compare-model-title">
+        <h2 class="section-heading" id="compare-model-title">
+          <span class="section-number">02</span> First, compare the context
+        </h2>
+        <p class="section-note">
+          <strong>Playwright UI</strong> checks browser locators and auto-waits;
+          <strong>Playwright API</strong> checks HTTP responses with
+          <code>expect</code>; <strong>Postman</strong> checks responses with
+          <code>pm.expect</code>. UI assertions have no Postman equivalent.
+        </p>
+      </section>
+      <section aria-labelledby="interview-title">
+        <h2 class="section-heading" id="interview-title">
+          <span class="section-number">03</span> Most-asked interview checks
+        </h2>
+        <table class="interview-table">
+          <thead>
+            <tr>
+              <th scope="col">Question</th>
+              <th scope="col">Short answer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <code>toBeVisible()</code> vs <code>toBeInViewport()</code>?
+              </td>
+              <td>
+                Visible can be off-screen; in-viewport means it intersects the
+                viewport.
+              </td>
+            </tr>
+            <tr>
+              <td><code>toBeHidden()</code> vs <code>toBeDetached()</code>?</td>
+              <td>
+                Hidden may still be in the DOM; detached means no DOM node is
+                matched.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>toHaveText()</code> vs <code>toContainText()</code>?
+              </td>
+              <td>Exact text match vs partial text match.</td>
+            </tr>
+            <tr>
+              <td><code>toBe()</code> vs <code>toEqual()</code>?</td>
+              <td>
+                Primitive equality vs deep equality for objects and arrays.
+              </td>
+            </tr>
+            <tr>
+              <td>What are web-first assertions?</td>
+              <td>
+                Locator assertions that auto-wait for the expected UI state.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <footer class="footer">
+        <span>UI checks use locators; API checks use the HTTP response.</span>
+        <span>Playwright &amp; Postman Assertions · 1 / 2</span>
+      </footer>
+    </main>
+
+    <main class="sheet page-two">
+      <header class="masthead">
+        <div>
+          <p class="eyebrow">Interview reference · Page 2 of 2</p>
+          <h1>API Assertions: Playwright vs Postman</h1>
+          <p class="subtitle">
+            Compare equivalent checks against the same response data.
+          </p>
+        </div>
+        <div class="edition">API comparison</div>
+      </header>
+      <aside class="principle">
+        <strong>Same validation ideas</strong>
+        <span>Only the assertion syntax and response object differ.</span>
+      </aside>
+
+      <section aria-labelledby="generic-title">
+        <h2 class="section-heading" id="generic-title">
+          <span class="section-number">04</span> API Assertion Comparison
+        </h2>
+        <p class="section-note">
+          Both validate the same HTTP response. Playwright uses Jest-style
+          <code>expect</code>; Postman uses Chai-style <code>pm.expect</code>.
+          Parse with <code>await response.json()</code> in Playwright or
+          <code>pm.response.json()</code> in Postman. Use Ajv for Playwright
+          JSON Schema checks.
+        </p>
+        <div class="sample-data">
+          <span class="sample-label">Example response body</span>
+          <code
+            >{"id":101,"active":true,"user":{"name":"Sam"},"roles":["Admin","User"],"email":"sam@example.com","count":15,"middleName":null}</code
+          >
+        </div>
+        <table class="api-table">
+          <thead>
+            <tr>
+              <th scope="col">Validation</th>
+              <th scope="col">Playwright</th>
+              <th scope="col">Postman</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Status</td>
+              <td><code>expect(response.status()).toBe(200)</code></td>
+              <td><code>pm.response.to.have.status(200)</code></td>
+            </tr>
+            <tr>
+              <td>Primitive</td>
+              <td><code>expect(body.id).toBe(101)</code></td>
+              <td><code>pm.expect(body.id).to.equal(101)</code></td>
+            </tr>
+            <tr>
+              <td>Object / array deep equality</td>
+              <td>
+                <code>expect(body.user).toEqual({ name: 'Sam' })</code><br />
+                <code>expect(body.roles).toEqual(['Admin', 'User'])</code>
+              </td>
+              <td>
+                <code>pm.expect(body.user).to.eql({ name: 'Sam' })</code><br />
+                <code>pm.expect(body.roles).to.eql(['Admin', 'User'])</code>
+              </td>
+            </tr>
+            <tr>
+              <td>Contains</td>
+              <td><code>expect(body.roles).toContain('Admin')</code></td>
+              <td><code>pm.expect(body.roles).to.include('Admin')</code></td>
+            </tr>
+            <tr>
+              <td>Property</td>
+              <td><code>expect(body).toHaveProperty('id')</code></td>
+              <td><code>pm.expect(body).to.have.property('id')</code></td>
+            </tr>
+            <tr>
+              <td>Nested property</td>
+              <td>
+                <code>expect(body).toHaveProperty('user.name', 'Sam')</code>
+              </td>
+              <td><code>pm.expect(body.user.name).to.equal('Sam')</code></td>
+            </tr>
+            <tr>
+              <td>Array length</td>
+              <td><code>expect(body.roles).toHaveLength(2)</code></td>
+              <td><code>pm.expect(body.roles).to.have.length(2)</code></td>
+            </tr>
+            <tr>
+              <td>Pattern</td>
+              <td><code>expect(body.email).toMatch(/@/)</code></td>
+              <td><code>pm.expect(body.email).to.match(/@/)</code></td>
+            </tr>
+            <tr>
+              <td>Numeric bounds</td>
+              <td>
+                <code>expect(body.count).toBeGreaterThan(5)</code><br />
+                <code>expect(body.count).toBeLessThanOrEqual(20)</code>
+              </td>
+              <td>
+                <code>pm.expect(body.count).to.be.above(5)</code><br />
+                <code>pm.expect(body.count).to.be.at.most(20)</code>
+              </td>
+            </tr>
+            <tr>
+              <td>Negative</td>
+              <td><code>expect(status).not.toBe(500)</code></td>
+              <td><code>pm.expect(status).to.not.equal(500)</code></td>
+            </tr>
+            <tr>
+              <td>Header / content type</td>
+              <td>
+                <code
+                  >expect(response.headers()['content-type']).toContain('json')</code
+                >
+              </td>
+              <td>
+                <code
+                  >pm.expect(pm.response.headers.get('Content-Type')).to.include('json')</code
+                >
+              </td>
+            </tr>
+            <tr>
+              <td>JSON schema</td>
+              <td><code>expect(validate(body)).toBe(true)</code></td>
+              <td><code>pm.response.to.have.jsonSchema(schema)</code></td>
+            </tr>
+            <tr>
+              <td>Response time</td>
+              <td><code>expect(elapsedMs).toBeLessThan(2000)</code></td>
+              <td>
+                <code
+                  >pm.expect(pm.response.responseTime).to.be.below(2000)</code
+                >
+              </td>
+            </tr>
+            <tr>
+              <td>Truthy / null</td>
+              <td>
+                <code>expect(body.active).toBeTruthy()</code><br />
+                <code>expect(body.middleName).toBeNull()</code>
+              </td>
+              <td>
+                <code>pm.expect(body.active).to.be.ok</code><br />
+                <code>pm.expect(body.middleName).to.be.null</code>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="bottom-grid">
+        <section aria-labelledby="failure-title">
+          <h2 class="section-heading" id="failure-title">
+            <span class="section-number">05</span> Negative &amp; soft checks
+          </h2>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Playwright</th>
+                <th scope="col">Postman</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>expect.soft(body.id).toBe(101)</code></td>
+                <td>
+                  <code
+                    >pm.test('ID', () =&gt;
+                    pm.expect(body.id).to.equal(101))</code
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="assertion-note">
+            <strong>Not identical:</strong> <code>expect.soft()</code> records a
+            failure and continues the current Playwright test. In Postman, use
+            separate <code>pm.test()</code> blocks to report checks separately.
+          </div>
+        </section>
+      </div>
+      <footer class="footer">
+        <span
+          >Playwright Test uses Jest-style expect; Postman tests use Chai-style
+          assertions.</span
+        >
+        <span>Playwright &amp; Postman Assertions · 2 / 2</span>
+      </footer>
+    </main>
+  </body>
+</html>

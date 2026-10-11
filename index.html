@@ -1,40 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>PlayWright QA Hub</title>
-    <style>
-        body{
-            font-family:Arial;
-            max-width:1000px;
-            margin:auto;
-            padding:40px;
-            background:#f5f5f5;
-        }
-        .card{
-            background:white;
-            padding:20px;
-            border-radius:10px;
-            margin:15px 0;
-            box-shadow:0 2px 10px rgba(0,0,0,.1);
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PlaywrightHUB | QA Learning Hub</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>🚀 Yugender QA Learning Hub</h1>
-
-    <div class="card">
-        <h2>Playwright</h2>
-        <p>Assertions, Locators, Frames, POM</p>
-    </div>
-
-    <div class="card">
-        <h2>API Testing </h2>
-        <p>Status Codes, Auth, Validation</p>
-    </div>
-
-    <div class="card">
-        <h2>Interview Questions</h2>
-        <p>Playwright, API, Behavioral</p>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-current="page">Playwright<span>HUB</span></a>
+            <nav class="top-nav" aria-label="Main navigation">
+                <a href="Playwright/index.html">Playwright</a>
+                <a href="Javascript/Asynchronus.html">JavaScript</a>
+                <a href="TypeScript/Types.html">TypeScript</a>
+                <a href="APITesting/Requests.html">API Testing</a>
+            </nav>
+        </div>
+    </header>
+    <div class="docs-layout">
+        <aside class="sidebar" aria-label="Learning paths">
+            <p class="sidebar-label">Learning paths</p>
+            <a href="Playwright/index.html">Playwright</a>
+            <a href="Javascript/Asynchronus.html">JavaScript</a>
+            <a href="TypeScript/Types.html">TypeScript</a>
+            <a href="APITesting/Requests.html">API Testing</a>
+        </aside>
+        <main class="article home-article">
+            <p class="breadcrumb">QA learning hub</p>
+            <h1>PlaywrightHUB</h1>
+            <p class="intro">Build stronger automation skills with focused notes on browser testing, JavaScript, TypeScript, and APIs.</p>
+            <section class="category-grid" aria-label="Learning categories">
+                <a class="category-card" href="Playwright/index.html">
+                    <span class="category-kicker">Browser automation</span>
+                    <h2>Playwright</h2>
+                    <p>Write reliable browser tests with assertions, locators, frames, and page objects.</p>
+                    <span class="category-action">Start with Assertions</span>
+                </a>
+                <a class="category-card" href="Javascript/Asynchronus.html">
+                    <span class="category-kicker">Language basics</span>
+                    <h2>JavaScript</h2>
+                    <p>Work confidently with promises, async functions, and error handling.</p>
+                    <span class="category-action">Start with Asynchronous JavaScript</span>
+                </a>
+                <a class="category-card" href="TypeScript/Types.html">
+                    <span class="category-kicker">Typed JavaScript</span>
+                    <h2>TypeScript</h2>
+                    <p>Explore types, interfaces, and generics used in maintainable test projects.</p>
+                    <span class="category-action">Start with Types</span>
+                </a>
+                <a class="category-card" href="APITesting/Requests.html">
+                    <span class="category-kicker">Service quality</span>
+                    <h2>API Testing</h2>
+                    <p>Test requests, status codes, authentication, and response contracts.</p>
+                    <span class="category-action">Start with Requests</span>
+                </a>
+            </section>
+        </main>
     </div>
 </body>
 </html>
